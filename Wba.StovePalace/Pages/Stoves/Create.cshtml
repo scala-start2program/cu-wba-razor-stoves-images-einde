@@ -1,0 +1,79 @@
+﻿@page
+@model Wba.StovePalace.Pages.Stoves.CreateModel
+
+@{
+    ViewData["Title"] = "Nieuwe kachel";
+    string ImagePath = "~/images/noimage.jpg";
+}
+
+<h1>Een nieuwe kachel toevoegen</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Stove.BrandId" class="control-label"></label>
+                <select asp-for="Stove.BrandId" class="form-control" asp-items="ViewBag.BrandId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stove.FuelId" class="control-label"></label>
+                <select asp-for="Stove.FuelId" class="form-control" asp-items="ViewBag.FuelId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stove.ModelName" class="control-label"></label>
+                <input asp-for="Stove.ModelName" class="form-control" />
+                <span asp-validation-for="Stove.ModelName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stove.Performance" class="control-label"></label>
+                <input asp-for="Stove.Performance" class="form-control" />
+                <span asp-validation-for="Stove.Performance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stove.SalesPrice" class="control-label"></label>
+                <input asp-for="Stove.SalesPrice" class="form-control" />
+                <span asp-validation-for="Stove.SalesPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="PhotoUpload" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <div class="custom-file">
+                        <input asp-for="PhotoUpload" class="custom-file-input form-control" />
+                        <label class="custom-file-label">Klik hier om foto te wijzigen</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row col-sm-4 offset-4">
+                <img class="imageThumbnail" src="@ImagePath" asp-append-version="true" />
+            </div>
+
+            <div class="form-group">
+                <div class="btn-group">
+                    <button type="submit" class="btn  btn-success" title="Opslaan">
+                        <i class="far fa-save"></i>
+                    </button>
+                    <a asp-page="Index" class="btn btn-danger" title="Annuleren">
+                        <i class="fas fa-undo-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            @section Scripts {
+                <script>
+                    $(document).ready(function () {
+                        $('.custom-file-input').on("change", function () {
+                            var fileName = $(this).val().split("\\").pop();
+                            $(this).next('.custom-file-label').html(fileName);
+                        });
+                    });
+                </script>
+            }
+        </form>
+    </div>
+</div>
+
+
